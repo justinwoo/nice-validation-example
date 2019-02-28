@@ -2,11 +2,11 @@ module Main where
 
 import Prelude
 
-import Control.Monad.Eff (Eff)
-import Control.Monad.Eff.Console (CONSOLE, log)
-import Data.Foldable (fold, foldl, intercalate)
+import Data.Foldable (intercalate)
 import Data.List.Types (NonEmptyList)
 import Data.Validation.Semigroup (V, invalid, unV)
+import Effect (Effect)
+import Effect.Class.Console (log)
 
 type FormData =
   { appleColor :: String
@@ -43,7 +43,7 @@ testMyValidated =
   <$> appleIsRed testData.appleColor
   <*> bananaIsNotGreen testData.bananaColor
 
-printMyValidated :: MyValidated FormData -> Eff _ Unit
+printMyValidated :: MyValidated FormData -> Effect Unit
 printMyValidated = unV
   (\errors -> log $ "got errors: " <> intercalate ", " errors)
   (\formData ->
@@ -66,7 +66,7 @@ errorMyValidated2 =
   <$> appleIsRed "yellow"
   <*> bananaIsNotGreen "green"
 
-main :: forall e. Eff (console :: CONSOLE | e) Unit
+main :: Effect Unit
 main = do
   printMyValidated testMyValidated
   -- output:

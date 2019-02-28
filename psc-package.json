@@ -1,13 +1,13 @@
 {
     "name": "nice-validation-example",
-    "set": "psc-0.11.7",
+    "set": "psc-0.12.3",
     "source": "https://github.com/purescript/package-sets.git",
     "depends": [
         "lists",
         "validation",
         "psci-support",
         "console",
-        "eff",
+        "effect",
         "prelude"
     ]
 }
